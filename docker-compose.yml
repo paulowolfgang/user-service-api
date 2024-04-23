@@ -8,6 +8,8 @@ services:
         volumes:
             - ./:/usr/share/nginx/html
         restart: always
+        depends_on:
+            - db
         networks:
             - docker
     db:
@@ -20,6 +22,8 @@ services:
             MYSQL_DATABASE: docker
             MYSQL_USER: docker
             MYSQL_PASSWORD: docker
+        volumes:
+            - .docker/dbdata:/var/lib/mysql
         networks:
             - docker
 
