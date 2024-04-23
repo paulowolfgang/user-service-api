@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+    laravel-docker:
+        build: ./
+        ports:
+            - "8000:80"
+        volumes:
+            - ./:/usr/share/nginx/html
+        restart: always
+        networks:
+            - docker
+    db:
+        image: mysql
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: docker
+            MYSQL_DATABASE: docker
+            MYSQL_USER: docker
+            MYSQL_PASSWORD: docker
+        networks:
+            - docker
+
+networks:
+    docker:
+        driver: bridge
