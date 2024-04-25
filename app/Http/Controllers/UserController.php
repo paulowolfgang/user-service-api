@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -36,7 +37,12 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         try {
-            $user = $this->user->create($request->all());
+            $userData = $request->all();
+
+            $userData['password'] = Hash::make($request->password);
+
+            $user = $this->user->create($userData);
+
             return response()->json($user, 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -56,8 +62,12 @@ class UserController extends Controller
 
             $user->name = $validatedData['name'];
             $user->email = $validatedData['email'];
-            $user->password = $validatedData['password'];
-            $user->update();
+
+            if ($request->has('password')) {
+                $user->password = Hash::make($validatedData['password']);
+            }
+
+            $user->save();
 
             return response()->json($user, 200);
         } catch (\Exception $e) {
