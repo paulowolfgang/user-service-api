@@ -13,8 +13,7 @@ De que coisas você precisa para instalar o software e como instalá-lo?
 ```
 PHP 8.0 ou superior
 Banco de Dados MySQL 8 ou superior
-Gerenciador de dependências PHP (Composer)
-Você também pode rodar a partir do Docker, basta rodar o comando 'docker-compose up -d' para levantar todo o ambiente necessário
+Você também pode rodar a partir do Docker, basta rodar dentro do diretório da aplicação o comando 'docker-compose up -d' para levantar todo o ambiente necessário
 ```
 
 ## 📦 Implantação
