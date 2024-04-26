@@ -28,14 +28,47 @@ Rode o comando 'php artisan key:generate' para gerar a chave de segurança da ap
 
 Rotas públicas:
 
-- Registrar novo usuário: http://localhost:8000/api/register (POST)
+- Registrar novo usuário: http://localhost:8000/api/register (POST) <br/>
+
+```
+
+{
+    "name": "Fulano",
+    "email": "fulano@example.com",
+    "password": "senha1234"
+}
+
+```
+
 - Logar na API: http://localhost:8000/api/login (POST)
+
+```
+
+{
+    "email": "paulo@example.com",
+    "password": "senha1234"
+}
+
+```
+
+OBS: Após logar você receberá um token como resposta que deverá ser usado nas requisições para todas as rotas protegidas (Bearer Token).
 
 Rotas protegidas:
 
 - Buscar todos os usuários: http://localhost:8000/api/users (GET)
 - Buscar usuário por ID: http://localhost:8000/api/users/{id} (GET)
 - Alterar usuário: http://localhost:8000/api/users/{id} (PUT)
+
+```
+
+{
+    "name": "Fulano de Tal",
+    "email": "fulano_de_tal@example.com",
+    "password": "senha12345678"
+}
+
+```
+
 - Deletar usuário: http://localhost:8000/api/users/{id} (DELETE)
 - Sair (revogar autenticação): http://localhost:8000/api/logout (POST)
 
