@@ -14,7 +14,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
         ];
@@ -24,6 +24,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name.required' => 'O campo NAME é obrigatório!',
+            'name.min' => 'O campo NAME precisa ter pelo menos 3 caracteres!',
             'email.required' => 'O campo EMAIL é obrigatório!',
             'email.email' => 'O campo EMAIL precisa ser um endereço de e-mail válido!',
             'email.unique' => 'O e-mail informado já está em uso, cadastre um novo!',

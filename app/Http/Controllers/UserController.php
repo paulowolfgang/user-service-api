@@ -15,7 +15,7 @@ class UserController extends Controller
         $this->user = $users;
     }
 
-    public function index()
+    public function showAll()
     {
         $users = $this->user->all();
         return response()->json($users);
@@ -34,13 +34,11 @@ class UserController extends Controller
         }
     }
 
-    public function store(UserRequest $request)
+    public function register(UserRequest $request)
     {
         try {
-            $userData = $request->all();
-
+            $userData = $request->validated();
             $userData['password'] = Hash::make($request->password);
-
             $user = $this->user->create($userData);
 
             return response()->json($user, 201);
@@ -57,9 +55,7 @@ class UserController extends Controller
     {
         try {
             $user = $this->user->findOrFail($id);
-
             $validatedData = $request->validated();
-
             $user->name = $validatedData['name'];
             $user->email = $validatedData['email'];
 
@@ -69,7 +65,7 @@ class UserController extends Controller
 
             $user->save();
 
-            return response()->json($user, 200);
+            return response()->json($user);
         } catch (\Exception $e) {
             return response()->json([
                 'info' => 'error',

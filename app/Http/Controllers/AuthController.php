@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -16,9 +15,33 @@ class AuthController extends Controller
             $user = Auth::user();
             $token = $user->createToken('authToken')->plainTextToken;
 
-            return response()->json(['token' => $token], 200);
+            return response()->json(['token' => $token]);
         } else {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json([
+                'info' => 'error',
+                'result' => 'Unauthorized!',
+                'error' => 'Credenciais inválidas.',
+            ], 401);
+        }
+    }
+
+    public function logout()
+    {
+        if (auth()->user()) {
+
+            auth()->user()->tokens()->delete();
+
+            return response()->json([
+                'info' => 'success',
+                'result' => 'Unauthorized!',
+                'error' => 'Usuário deslogado com sucesso.',
+            ]);
+        } else {
+            return response()->json([
+                'info' => 'error',
+                'result' => 'Unauthorized!',
+                'error' => 'Não há usuário autenticado.',
+            ], 401);
         }
     }
 }
