@@ -24,6 +24,21 @@ Rode o comando 'composer install' para instalar as dependências da aplicação.
 Rode o comando 'php artisan migrate' para rodar as migrations de versionamento do banco de dados. <br/>
 Rode o comando 'php artisan key:generate' para gerar a chave de segurança da aplicação. <br/>
 
+## 💻 Usando a Aplicação (Lista de end-points)
+
+Rotas públicas:
+
+- Registrar novo usuário: http://localhost:8000/api/register (POST)
+- Logar na API: http://localhost:8000/api/login (POST)
+
+Rotas protegidas:
+
+- Buscar todos os usuários: http://localhost:8000/api/users (GET)
+- Buscar usuário por ID: http://localhost:8000/api/users/{id} (GET)
+- Alterar usuário: http://localhost:8000/api/users/{id} (PUT)
+- Deletar usuário: http://localhost:8000/api/users/{id} (DELETE)
+- Sair (revogar autenticação): http://localhost:8000/api/logout (POST)
+
 ## 🛠️ Construído com
 
 * [Laravel](https://laravel.com/) - Framework utilizado
